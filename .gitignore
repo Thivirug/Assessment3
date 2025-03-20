@@ -1,0 +1,20 @@
+# Ignore large model files
+*.keras
+*.h5
+*.pth
+*.pb
+
+# Ignore datasets
+*.csv
+*.npy
+*.npz
+
+# Ignore images and other large files
+*.jpg
+*.png
+*.jpeg
+*.gif
+
+# Ignore directories with large files
+Saved Models/
+data/
