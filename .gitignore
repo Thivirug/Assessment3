@@ -9,6 +9,7 @@
 *.png
 *.jpeg
 *.gif
+*.Identifier
 
 # Ignore directories with large files
 data/
