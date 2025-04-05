@@ -4,11 +4,6 @@
 *.pth
 *.pb
 
-# Ignore datasets
-*.csv
-*.npy
-*.npz
-
 # Ignore images and other large files
 *.jpg
 *.png
@@ -16,6 +11,5 @@
 *.gif
 
 # Ignore directories with large files
-Saved Models/
 data/
 Checkpoints/
