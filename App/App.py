@@ -2,7 +2,7 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-from Assessment3.App.Unet import UNet
+from Unet import UNet
 import keras
 
 # load the model
@@ -71,7 +71,7 @@ def run_app() -> None:
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
 
     # load model
-    model = load_model('Checkpoints/unet_best_model.keras')
+    model = load_model('../Checkpoints/unet_best_model.keras')
 
     if uploaded_file is not None:
         # read image
