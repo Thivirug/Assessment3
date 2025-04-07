@@ -64,8 +64,12 @@ def run_app() -> None:
         Run the Streamlit app.
     """
 
+    st.set_page_config(
+        page_title="Generate Mask",
+        page_icon= "⚙️", 
+    )
     # title
-    st.title("Image Segmentation")
+    st.title("Image Segmentation & Area Calculation ⚙️")
 
     # upload image
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
