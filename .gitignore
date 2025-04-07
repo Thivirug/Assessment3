@@ -3,6 +3,7 @@
 *.h5
 *.pth
 *.pb
+*.pyc
 
 # Ignore images and other large files
 *.jpg
