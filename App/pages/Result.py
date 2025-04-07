@@ -1,6 +1,5 @@
 import streamlit as st
 import tensorflow as tf
-import numpy as np
 from PIL import Image
 from Unet import UNet
 import keras
@@ -57,6 +56,8 @@ def generate_mask(model: keras.Model, uploaded_file) -> tf.Tensor:
 
     return pred_mask
 
+# # calculate area
+# def calc_area() -> float:
 
 # run app
 def run_app() -> None:
