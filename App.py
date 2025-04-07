@@ -10,7 +10,7 @@ def load_model(model_path: str) -> keras.Model:
     """
         Load the pre-trained UNet model.
     """
-    model = tf.keras.models.load_model('Checkpoints/unet_best_model.keras', custom_objects={'UNet': UNet})
+    model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
     return model
 
 # preprocess image
@@ -79,7 +79,7 @@ def run_app() -> None:
 
         # Reset file pointer before passing to generate_mask
         uploaded_file.seek(0)
-        
+
         st.image(img, caption='Uploaded Image.', use_container_width=True)
 
         # run prediction when button is pressed
