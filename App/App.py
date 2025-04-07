@@ -2,7 +2,7 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-from Unet import UNet
+from Assessment3.App.Unet import UNet
 import keras
 
 # load the model
