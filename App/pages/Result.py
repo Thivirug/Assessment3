@@ -70,10 +70,10 @@ def run_app() -> None:
         page_icon= "⚙️", 
     )
     # title
-    st.title("Image Segmentation & Area Calculation ⚙️")
+    st.write("## Image Segmentation & Area Calculation ⚙️")
 
     # upload image
-    uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+    uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"], )
 
     # load model
     model = load_model('../Checkpoints/unet_best_model.keras')
@@ -82,7 +82,7 @@ def run_app() -> None:
         # read image
         img = Image.open(uploaded_file).convert("RGB")
 
-        # Reset file pointer before passing to generate_mask
+        # reset file pointer before passing to generate_mask
         uploaded_file.seek(0)
 
         st.image(img, caption='Uploaded Image.', use_container_width=True)
