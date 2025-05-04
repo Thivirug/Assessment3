@@ -7,6 +7,7 @@ import cv2
 import numpy as np
 import gdown
 import os
+import keras
 
 # load the model
 # def load_model(model_path: str) -> keras.Model:
@@ -31,7 +32,7 @@ def load_model():
         gdown.download(id=file_id, output=model_path, quiet=False)
 
 
-    model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
+    model = keras.models.load_model(model_path, custom_objects={'UNet': UNet})
     return model
 
 # preprocess image
