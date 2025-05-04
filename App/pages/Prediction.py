@@ -7,6 +7,8 @@ import cv2
 import numpy as np
 
 # load the model
+# Decorator to cache non-data objects
+@st.experimental_singleton
 def load_model(model_path: str) -> keras.Model:
     """
         Load the trained UNet model.
