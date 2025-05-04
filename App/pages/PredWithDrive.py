@@ -5,39 +5,50 @@ from Unet import UNet
 import keras
 import cv2
 import numpy as np
-import requests
+import subprocess
+import gdown
 import os
+
+# def download_file_from_google_drive(destination):
+#     file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
+#     URL = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+#     session = requests.Session()
+#     response = session.get(URL, params={'id': file_id}, stream=True)
+#     token = get_confirm_token(response)
+
+#     if token:
+#         params = {'id': file_id, 'confirm': token}
+#         response = session.get(URL, params=params, stream=True)
+
+#     save_response_content(response, destination)
+
+# def get_confirm_token(response):
+#     for key, value in response.cookies.items():
+#         if key.startswith('download_warning'):
+#             return value
+#     return None
+
+# def save_response_content(response, destination):
+#     CHUNK_SIZE = 32768  # 32KB
+
+#     # Ensure the directory exists
+#     os.makedirs(os.path.dirname(destination), exist_ok=True)
+
+#     with open(destination, "wb") as f:
+#         for chunk in response.iter_content(CHUNK_SIZE):
+#             if chunk:  # filter out keep-alive new chunks
+#                 f.write(chunk)
+
+
 
 def download_file_from_google_drive(destination):
     file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
-    URL = f"https://drive.google.com/uc?export=download&id={file_id}"
+    #url = f"https://drive.google.com/uc?id={file_id}"
 
-    session = requests.Session()
-    response = session.get(URL, params={'id': file_id}, stream=True)
-    token = get_confirm_token(response)
-
-    if token:
-        params = {'id': file_id, 'confirm': token}
-        response = session.get(URL, params=params, stream=True)
-
-    save_response_content(response, destination)
-
-def get_confirm_token(response):
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
-            return value
-    return None
-
-def save_response_content(response, destination):
-    CHUNK_SIZE = 32768  # 32KB
-
-    # Ensure the directory exists
     os.makedirs(os.path.dirname(destination), exist_ok=True)
+    subprocess.run(["gdown", "--id", file_id, "-O", destination], check=True)
 
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(CHUNK_SIZE):
-            if chunk:  # filter out keep-alive new chunks
-                f.write(chunk)
 
 # load the model
 # Decorator to cache non-data objects
@@ -147,8 +158,6 @@ def run_app() -> None:
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"], )
 
     # download model from Google Drive
-
-    # load model
     # Determine the absolute path to the directory containing the script
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     # go back two directories to reach the root directory
