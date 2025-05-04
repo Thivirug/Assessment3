@@ -6,12 +6,30 @@ def page_info() -> None:
     """
 
     col1, col2, col3 = st.columns([0.5, 0.2, 3])
+
+    # about page
     with col1:
         st.page_link("pages/About.py", label="About", icon="👀")
     with col2:
         st.write("➡️")
     with col3:
         st.write("Learn more about the app, how the model was trained, and future plans.")
+
+    # contact page
+    with col1:
+        st.page_link("pages/Contact.py", label="Contact", icon="✉️")
+    with col2:
+        st.write("➡️")
+    with col3:
+        st.write("Get in touch with us for any queries or feedback.")
+
+    # prediction page
+    with col1:
+        st.page_link("pages/Prediction.py", label="Predict", icon="⚙️")
+    with col2:
+        st.write("➡️")
+    with col3:
+        st.write("Upload your wound image and get the segmented mask and area calculation.")
 
 def run() -> None:
     """

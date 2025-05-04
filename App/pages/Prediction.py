@@ -5,16 +5,35 @@ from Unet import UNet
 import keras
 import cv2
 import numpy as np
+import subprocess
+import os
 
-# load the model
-# Decorator to cache non-data objects
-@st.cache_resource
+def download_file_from_google_drive(destination):
+    """
+        Download the model file from Google Drive.
+    """
+    # Google Drive file ID
+    file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
+
+    os.makedirs(os.path.dirname(destination), exist_ok=True)
+    subprocess.run(["gdown", "--id", file_id, "-O", destination], check=True)
+
+@st.cache_resource # Decorator to cache non-data objects
 def load_model(model_path: str) -> keras.Model:
     """
         Load the trained UNet model.
     """
     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
     return model
+
+@st.cache_resource
+def get_model(destination):
+    """
+        Download model once and cache it.
+    """
+    if not os.path.exists(destination):
+        download_file_from_google_drive(destination)
+    return load_model(destination)
 
 def prep_img(uploaded_file) -> tf.Tensor:
     """
@@ -27,7 +46,6 @@ def prep_img(uploaded_file) -> tf.Tensor:
 
     return img, original_shape
     
-
 def preprocess_image(uploaded_file) -> tf.Tensor:
     """
         Preprocess the input image before predicting.
@@ -45,7 +63,6 @@ def preprocess_image(uploaded_file) -> tf.Tensor:
 
     return img, original_shape
 
-# generate mask
 def generate_mask(model: keras.Model, uploaded_file) -> tf.Tensor:
     """
         Generate mask for the input image using the pre-trained UNet model.
@@ -67,7 +84,6 @@ def generate_mask(model: keras.Model, uploaded_file) -> tf.Tensor:
 
     return pred_mask
 
-# outline the mask
 def outline_mask(pred_mask: tf.Tensor, uploaded_file) -> np.ndarray:
     """
         Outline the predicted mask.
@@ -97,7 +113,6 @@ def outline_mask(pred_mask: tf.Tensor, uploaded_file) -> np.ndarray:
 # # calculate area
 # def calc_area() -> float:
 
-# run app
 def run_app() -> None:
     """
         Run the Streamlit app.
@@ -113,8 +128,16 @@ def run_app() -> None:
     # upload image
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"], )
 
-    # load model
-    model = load_model('../Checkpoints/unet_best_model.keras')
+    # download model from Google Drive
+    # Determine the absolute path to the directory containing the script
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # go back two directories to reach the root directory (assessment3)
+    BASE_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir, os.pardir))
+
+    # Construct the absolute path to the destination file
+    destination = os.path.join(BASE_DIR, "Checkpoints", "unet_best_model.keras")
+    # download model if it doesn't exist and load it
+    model = get_model(destination)
 
     if uploaded_file is not None:
         # read image
@@ -123,6 +146,7 @@ def run_app() -> None:
         # reset file pointer before passing to generate_mask
         uploaded_file.seek(0)
 
+        # display image
         st.image(img, caption='Uploaded Image.', use_container_width=True)
 
         # generate predicted mask
