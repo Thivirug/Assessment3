@@ -37,6 +37,8 @@ def run() -> None:
         2. The model will process the image and generate a segmented mask.
         3. The segmented area will be displayed along with the original image.
 
+        ---
+
         **👈 Navigate using the sidebar**
     """
     )
