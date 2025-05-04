@@ -151,7 +151,12 @@ def run_app() -> None:
     download_file_from_google_drive(destination)
 
     # load model
-    model = load_model('Checkpoints/unet_best_model.keras')
+    # Determine the absolute path to the directory containing the script
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    # Construct the absolute path to the destination file
+    destination = os.path.join(BASE_DIR, "Checkpoints", "unet_best_model.keras")
+    model = load_model(destination)
 
     if uploaded_file is not None:
         # read image
