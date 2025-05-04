@@ -147,15 +147,16 @@ def run_app() -> None:
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"], )
 
     # download model from Google Drive
-    destination = "Checkpoints/unet_best_model.keras"
-    download_file_from_google_drive(destination)
 
     # load model
     # Determine the absolute path to the directory containing the script
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # go back two directories to reach the root directory
+    BASE_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir, os.pardir))
 
     # Construct the absolute path to the destination file
     destination = os.path.join(BASE_DIR, "Checkpoints", "unet_best_model.keras")
+    download_file_from_google_drive(destination)
     model = load_model(destination)
 
     if uploaded_file is not None:
