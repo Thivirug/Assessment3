@@ -37,6 +37,7 @@ def run() -> None:
         2. The model will process the image and generate a segmented mask.
         3. The segmented area will be displayed along with the original image.
 
+        **👈 Navigate using the sidebar**
     """
     )
 
@@ -48,7 +49,6 @@ def run() -> None:
     )
 
     st.write(
-        "**👈 Navigate using the sidebar**\n"
         f"{st.page_link("pages/About.py")} -> Learn more about the app, how the model was trained, and future plans."
         # * Contact -> Get in touch with us for any inquiries or feedback.
         # * Prediction -> Upload your own images for segmentation and view the predicted results."
