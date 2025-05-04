@@ -49,7 +49,7 @@ def run() -> None:
 
     st.write(
         "**👈 Navigate using the sidebar**\n"
-        f"* {st.page_link("pages/About.py")} -> Learn more about the app, how the model was trained, and future plans."
+        f"{st.page_link("pages/About.py")} -> Learn more about the app, how the model was trained, and future plans."
         # * Contact -> Get in touch with us for any inquiries or feedback.
         # * Prediction -> Upload your own images for segmentation and view the predicted results."
     )
