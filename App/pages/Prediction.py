@@ -8,7 +8,7 @@ import numpy as np
 
 # load the model
 # Decorator to cache non-data objects
-@st.experimental_singleton
+@st.cache_resource
 def load_model(model_path: str) -> keras.Model:
     """
         Load the trained UNet model.
