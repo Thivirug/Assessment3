@@ -5,32 +5,30 @@ from Unet import UNet
 import keras
 import cv2
 import numpy as np
-import gdown
-import os
 
 # load the model
-# def load_model(model_path: str) -> keras.Model:
-#     """
-#         Load the trained UNet model.
-#     """
-#     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
-#     return model
-def load_model():
+def load_model(model_path: str) -> keras.Model:
     """
-        Load the trained UNet model from google drive.
+        Load the trained UNet model.
     """
-    
-    model_path = "Checkpoints/unet_best_model.keras"
-    if not os.path.exists(model_path):
-        os.makedirs("Checkpoints", exist_ok=True)
-
-        # download the model from google drive
-        file_id = "1ryoFoF1pyVlstwN3mgZ8gfxei3-M2cE5"
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, model_path)
-
     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
     return model
+# def load_model():
+#     """
+#         Load the trained UNet model from google drive.
+#     """
+    
+#     model_path = "Checkpoints/unet_best_model.keras"
+#     if not os.path.exists(model_path):
+#         os.makedirs("Checkpoints", exist_ok=True)
+
+#         # download the model from google drive
+#         file_id = "1ryoFoF1pyVlstwN3mgZ8gfxei3-M2cE5"
+#         url = f"https://drive.google.com/uc?id={file_id}"
+#         gdown.download(url, model_path)
+
+#     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
+#     return model
 
 # preprocess image
 
@@ -132,8 +130,7 @@ def run_app() -> None:
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"], )
 
     # load model
-    # model = load_model('../Checkpoints/unet_best_model.keras')
-    model = load_model()
+    model = load_model('../Checkpoints/unet_best_model.keras')
 
     if uploaded_file is not None:
         # read image

@@ -16,8 +16,8 @@ def run() -> None:
     # Add a subheader
     st.subheader("MedAI: Wound Image Segmentation", divider=True)
     # Add an image
-    # st.image("../App/Assets/logo.png", width=300)
-    st.image("App/Assets/logo.png", width=300)
+    st.image("../App/Assets/logo.png", width=300)
+    
     # Add a horizontal line
     st.markdown(
         """
