@@ -20,7 +20,7 @@ def load_model():
         Load the trained UNet model from google drive.
     """
     
-    model_path = "Checkpoints"
+    model_path = "Checkpoints/unet_best_model.keras"
     if not os.path.exists(model_path):
         os.makedirs("Checkpoints", exist_ok=True)
 
