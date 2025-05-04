@@ -43,11 +43,17 @@ def run() -> None:
     """
     )
 
-    st.write(
-        f"{st.page_link("pages/About.py", label="About", icon="👀")} {st.markdown("Learn more about the app, how the model was trained, and future plans.")}"
-        # * Contact -> Get in touch with us for any inquiries or feedback.
-        # * Prediction -> Upload your own images for segmentation and view the predicted results.
-    )
+    # st.write(
+    #     f"{st.page_link("pages/About.py", label="About", icon="👀")} {st.markdown("Learn more about the app, how the model was trained, and future plans.")}"
+    #     # * Contact -> Get in touch with us for any inquiries or feedback.
+    #     # * Prediction -> Upload your own images for segmentation and view the predicted results.
+    # )
+
+    col1, col2 = st.columns([1, 4])
+    with col1:
+        st.page_link("pages/About.py", label="About", icon="👀")
+    with col2:
+        st.write("Learn more about the app, how the model was trained, and future plans.")
 
 
 if __name__ == "__main__":
