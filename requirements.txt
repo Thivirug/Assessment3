@@ -1,0 +1,10 @@
+streamlit
+tensorflow
+keras
+pillow
+opencv-python
+numpy
+uuid
+albumentations
+matplotlib
+numpy
