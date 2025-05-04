@@ -34,7 +34,7 @@ def run() -> None:
         **👈 Navigate using the sidebar** 
         * About -> Learn more about the app, how the model was trained, and future plans.
         * Contact -> Get in touch with us for any inquiries or feedback.
-        * Result -> Upload your own images for segmentation and view the results.
+        * Predictions -> Upload your own images for segmentation and view the predicted results.
     """
     )
 
