@@ -1,5 +1,18 @@
 import streamlit as st
 
+def page_info() -> None:
+    """
+        Display the page information.
+    """
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.page_link("pages/About.py", label="About", icon="👀")
+    with col2:
+        st.write("➡️")
+    with col3:
+        st.write("Learn more about the app, how the model was trained, and future plans.")
+
 def run() -> None:
     """
         Run the Streamlit app's entry point.
@@ -43,18 +56,8 @@ def run() -> None:
     """
     )
 
-    # st.write(
-    #     f"{st.page_link("pages/About.py", label="About", icon="👀")} {st.markdown("Learn more about the app, how the model was trained, and future plans.")}"
-    #     # * Contact -> Get in touch with us for any inquiries or feedback.
-    #     # * Prediction -> Upload your own images for segmentation and view the predicted results.
-    # )
-
-    col1, col2 = st.columns([1, 4])
-    with col1:
-        st.page_link("pages/About.py", label="About", icon="👀")
-    with col2:
-        st.write("Learn more about the app, how the model was trained, and future plans.")
-
+    # display the page information
+    page_info()
 
 if __name__ == "__main__":
     run()
