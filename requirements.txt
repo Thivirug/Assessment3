@@ -1,5 +1,5 @@
 # opencv-python-headless is used instead of opencv-python to avoid unnecessary GUI dependencies
-# gdown is used to download the dataset from Google Drive
+# gdown is used to download the model from Google Drive
 # albumentations is used for data augmentation
 # matplotlib is used for plotting images
 # numpy is used for numerical operations
