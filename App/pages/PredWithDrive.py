@@ -6,53 +6,19 @@ import keras
 import cv2
 import numpy as np
 import subprocess
-import gdown
 import os
 
-# def download_file_from_google_drive(destination):
-#     file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
-#     URL = f"https://drive.google.com/uc?export=download&id={file_id}"
-
-#     session = requests.Session()
-#     response = session.get(URL, params={'id': file_id}, stream=True)
-#     token = get_confirm_token(response)
-
-#     if token:
-#         params = {'id': file_id, 'confirm': token}
-#         response = session.get(URL, params=params, stream=True)
-
-#     save_response_content(response, destination)
-
-# def get_confirm_token(response):
-#     for key, value in response.cookies.items():
-#         if key.startswith('download_warning'):
-#             return value
-#     return None
-
-# def save_response_content(response, destination):
-#     CHUNK_SIZE = 32768  # 32KB
-
-#     # Ensure the directory exists
-#     os.makedirs(os.path.dirname(destination), exist_ok=True)
-
-#     with open(destination, "wb") as f:
-#         for chunk in response.iter_content(CHUNK_SIZE):
-#             if chunk:  # filter out keep-alive new chunks
-#                 f.write(chunk)
-
-
-
 def download_file_from_google_drive(destination):
+    """
+        Download the model file from Google Drive.
+    """
+    # Google Drive file ID
     file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
-    #url = f"https://drive.google.com/uc?id={file_id}"
 
     os.makedirs(os.path.dirname(destination), exist_ok=True)
     subprocess.run(["gdown", "--id", file_id, "-O", destination], check=True)
 
-
-# load the model
-# Decorator to cache non-data objects
-@st.cache_resource
+@st.cache_resource # Decorator to cache non-data objects
 def load_model(model_path: str) -> keras.Model:
     """
         Load the trained UNet model.
@@ -71,7 +37,6 @@ def prep_img(uploaded_file) -> tf.Tensor:
 
     return img, original_shape
     
-
 def preprocess_image(uploaded_file) -> tf.Tensor:
     """
         Preprocess the input image before predicting.
@@ -89,7 +54,6 @@ def preprocess_image(uploaded_file) -> tf.Tensor:
 
     return img, original_shape
 
-# generate mask
 def generate_mask(model: keras.Model, uploaded_file) -> tf.Tensor:
     """
         Generate mask for the input image using the pre-trained UNet model.
@@ -111,7 +75,6 @@ def generate_mask(model: keras.Model, uploaded_file) -> tf.Tensor:
 
     return pred_mask
 
-# outline the mask
 def outline_mask(pred_mask: tf.Tensor, uploaded_file) -> np.ndarray:
     """
         Outline the predicted mask.
@@ -141,7 +104,6 @@ def outline_mask(pred_mask: tf.Tensor, uploaded_file) -> np.ndarray:
 # # calculate area
 # def calc_area() -> float:
 
-# run app
 def run_app() -> None:
     """
         Run the Streamlit app.
@@ -160,12 +122,14 @@ def run_app() -> None:
     # download model from Google Drive
     # Determine the absolute path to the directory containing the script
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # go back two directories to reach the root directory
+    # go back two directories to reach the root directory (assessment3)
     BASE_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir, os.pardir))
 
     # Construct the absolute path to the destination file
     destination = os.path.join(BASE_DIR, "Checkpoints", "unet_best_model.keras")
     download_file_from_google_drive(destination)
+
+    # load model
     model = load_model(destination)
 
     if uploaded_file is not None:
@@ -175,6 +139,7 @@ def run_app() -> None:
         # reset file pointer before passing to generate_mask
         uploaded_file.seek(0)
 
+        # display image
         st.image(img, caption='Uploaded Image.', use_container_width=True)
 
         # generate predicted mask
