@@ -130,7 +130,7 @@ def run_app() -> None:
 
     # load model
     # model = load_model('../Checkpoints/unet_best_model.keras')
-    model = load_model('Checkpoints/unet_best_model.keras')
+    model = load_model()
 
     if uploaded_file is not None:
         # read image
