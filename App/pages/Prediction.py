@@ -26,11 +26,9 @@ def load_model():
 
         # download the model from google drive
         file_id = "1ryoFoF1pyVlstwN3mgZ8gfxei3-M2cE5"
-        # url = f"https://drive.google.com/uc?id={file_id}"
-        # gdown.download(url, model_path, quiet=False)
-        gdown.download(id=file_id, output=model_path, quiet=False)
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, model_path)
 
-    print(model_path)
     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
     return model
 
