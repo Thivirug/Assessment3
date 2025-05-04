@@ -44,7 +44,7 @@ def run() -> None:
     )
 
     st.write(
-        f"{st.page_link("pages/About.py", label="ABOUT", icon=":material/thumb_up")} -> Learn more about the app, how the model was trained, and future plans."
+        f"{st.page_link("pages/About.py", label="ABOUT", icon="👀")} -> Learn more about the app, how the model was trained, and future plans."
         # * Contact -> Get in touch with us for any inquiries or feedback.
         # * Prediction -> Upload your own images for segmentation and view the predicted results."
     )
