@@ -5,12 +5,27 @@ from Unet import UNet
 import keras
 import cv2
 import numpy as np
+import gdown
+import os
 
 # load the model
-def load_model(model_path: str) -> keras.Model:
+# def load_model(model_path: str) -> keras.Model:
+#     """
+#         Load the trained UNet model.
+#     """
+#     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
+#     return model
+def load_model():
     """
-        Load the pre-trained UNet model.
+        Load the trained UNet model from google drive.
     """
+    
+    model_path = "Checkpoints/unet_best_model.keras"
+    if not os.path.exists(model_path):
+        os.makedirs("Checkpoints", exist_ok=True)
+        url = "https://drive.google.com/file/d/1ryoFoF1pyVlstwN3mgZ8gfxei3-M2cE5/view?usp=drive_link"
+        gdown.download(url, model_path, quiet=False)
+
     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
     return model
 
