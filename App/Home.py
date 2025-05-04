@@ -25,7 +25,7 @@ def run() -> None:
         """
     )
     # Add a description
-    st.markdown(
+    st.write(
         """
         ### Welcome to MedAI, your go-to platform for wound image segmentation! 🩺
         This web application is designed to help you segment wound images using a UNet model.
@@ -36,6 +36,7 @@ def run() -> None:
         * About -> Learn more about the app, how the model was trained, and future plans.
         * Contact -> Get in touch with us for any inquiries or feedback.
         * Prediction -> Upload your own images for segmentation and view the predicted results.
+
     """
     )
 
