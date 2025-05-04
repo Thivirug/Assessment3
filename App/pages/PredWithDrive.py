@@ -136,11 +136,8 @@ def run_app() -> None:
 
     # Construct the absolute path to the destination file
     destination = os.path.join(BASE_DIR, "Checkpoints", "unet_best_model.keras")
-    # download model if it doesn't exist
-    get_model(destination)
-
-    # load model
-    model = load_model(destination)
+    # download model if it doesn't exist and load it
+    model = get_model(destination)
 
     if uploaded_file is not None:
         # read image
