@@ -1,9 +1,7 @@
 # Ignore large model files
-*.keras
-*.h5
-*.pth
 *.pb
 *.pyc
+*.keras
 
 # Ignore images and other large files
 *.jpg
@@ -13,4 +11,4 @@
 
 # Ignore directories with large files
 data/
-Checkpoints/
+checkpoints/
