@@ -25,7 +25,7 @@ def page_info() -> None:
 
     # prediction page
     with col1:
-        st.page_link("pages/Prediction.py", label="Predict", icon="⚙️")
+        st.page_link("pages/Diagnose.py", label="Diagnose", icon="🧠")
     with col2:
         st.write("➡️")
     with col3:
