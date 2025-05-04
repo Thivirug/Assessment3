@@ -5,7 +5,7 @@ def page_info() -> None:
         Display the page information.
     """
 
-    col1, col2, col3 = st.columns([1, 0.1, 3])
+    col1, col2, col3 = st.columns([0.5, 0.1, 3])
     with col1:
         st.page_link("pages/About.py", label="About", icon="👀")
     with col2:
