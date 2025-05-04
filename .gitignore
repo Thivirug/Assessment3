@@ -11,4 +11,4 @@
 
 # Ignore directories with large files
 data/
-checkpoints/
+Checkpoints/
