@@ -25,19 +25,33 @@ def run() -> None:
         """
     )
     # Add a description
-    st.write(
+    st.markdown(
         """
         ### Welcome to MedAI, your go-to platform for wound image segmentation! 🩺
         This web application is designed to help you segment wound images using a UNet model.
         You can upload your own images and visualise the segmentation results in real-time.
         Additionally, it outputs the area of the wounded region in square centimeters (cm²) for your convenience.
 
-        **👈 Navigate using the sidebar** 
-        * About -> Learn more about the app, how the model was trained, and future plans.
-        * Contact -> Get in touch with us for any inquiries or feedback.
-        * Prediction -> Upload your own images for segmentation and view the predicted results.
+        ### How to Use:
+        1. Upload your wound image in JPG, JPEG, or PNG format.
+        2. The model will process the image and generate a segmented mask.
+        3. The segmented area will be displayed along with the original image.
 
     """
+    )
+
+    # add page links
+    st.markdown(
+        """
+        ---
+        """
+    )
+
+    st.write(
+        "**👈 Navigate using the sidebar**\n"
+        f"* {st.page_link("pages/About.py")} -> Learn more about the app, how the model was trained, and future plans."
+        # * Contact -> Get in touch with us for any inquiries or feedback.
+        # * Prediction -> Upload your own images for segmentation and view the predicted results."
     )
 
 
