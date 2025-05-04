@@ -20,14 +20,14 @@ def load_model():
         Load the trained UNet model from google drive.
     """
     
-    model_path = "Checkpoints/unet_best_model.keras"
+    model_path = "Checkpoints"
     if not os.path.exists(model_path):
         os.makedirs("Checkpoints", exist_ok=True)
 
         # download the model from google drive
         file_id = "1ryoFoF1pyVlstwN3mgZ8gfxei3-M2cE5"
         url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, model_path, quiet=False)
+        gdown.download(url, model_path, quiet=False, fuzzy=True)
 
     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
     return model
