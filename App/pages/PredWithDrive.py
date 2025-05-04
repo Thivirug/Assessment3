@@ -26,6 +26,15 @@ def load_model(model_path: str) -> keras.Model:
     model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
     return model
 
+@st.cache_resource
+def get_model(destination):
+    """
+        Download model once and cache it.
+    """
+    if not os.path.exists(destination):
+        download_file_from_google_drive(destination)
+    return load_model(destination)
+
 def prep_img(uploaded_file) -> tf.Tensor:
     """
         Read and prepare the image as a tensor.
@@ -127,7 +136,8 @@ def run_app() -> None:
 
     # Construct the absolute path to the destination file
     destination = os.path.join(BASE_DIR, "Checkpoints", "unet_best_model.keras")
-    download_file_from_google_drive(destination)
+    # download model if it doesn't exist
+    get_model(destination)
 
     # load model
     model = load_model(destination)
