@@ -6,6 +6,7 @@ import keras
 import cv2
 import numpy as np
 import requests
+import os
 
 def download_file_from_google_drive(destination):
     file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
@@ -29,6 +30,9 @@ def get_confirm_token(response):
 
 def save_response_content(response, destination):
     CHUNK_SIZE = 32768  # 32KB
+
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(destination), exist_ok=True)
 
     with open(destination, "wb") as f:
         for chunk in response.iter_content(CHUNK_SIZE):
