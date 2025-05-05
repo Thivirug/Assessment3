@@ -12,3 +12,6 @@
 # Ignore directories with large files
 data/
 Checkpoints/
+
+# Model ID 
+*.toml

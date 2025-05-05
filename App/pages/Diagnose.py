@@ -8,24 +8,26 @@ import numpy as np
 import subprocess
 import os
 
-# initialise a session state variables for conditional rendering 
-if 'mask_generated' not in st.session_state:
-    st.session_state.mask_generated = False
-if 'outlined_image' not in st.session_state:
-    st.session_state.outlined_image = None
-if 'mask_image' not in st.session_state:
+# initialise session state variables for conditional rendering 
+if 'mask_generated' not in st.session_state: # to check if mask is generated
+    st.session_state.mask_generated = False 
+if 'outlined_image' not in st.session_state: # to check if outlined mask image is generated
+    st.session_state.outlined_image = None 
+if 'mask_image' not in st.session_state: # to check if mask image is generated
     st.session_state.mask_image = None
-if 'area_result' not in st.session_state:
+if 'area_result' not in st.session_state: # to check if area result is generated
     st.session_state.area_result = None
-if 'pred_mask' not in st.session_state:
+if 'pred_mask' not in st.session_state: # to check if prediction mask is generated
     st.session_state.pred_mask = None
 
 def download_file_from_google_drive(destination):
     """
         Download the model file from Google Drive.
     """
-    # Google Drive file ID
-    file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
+    # # Google Drive file ID
+    # file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
+    # Access the file ID from Streamlit secrets
+    file_id = st.secrets["model_file_id"]
 
     os.makedirs(os.path.dirname(destination), exist_ok=True)
     subprocess.run(["gdown", "--id", file_id, "-O", destination], check=True)
@@ -121,7 +123,12 @@ def outline_mask(pred_mask: tf.Tensor, uploaded_file) -> np.ndarray:
 
     return img
 
+# ----------------------------------------------------------------------------------------------------- #
+# Define the functions for button actions
 def show_mask(model, uploaded_file):
+    """
+        Generate and store the mask.
+    """
     with st.spinner("Generating mask..."):
         # generate mask
         pred_mask = generate_mask(model, uploaded_file)
@@ -130,10 +137,13 @@ def show_mask(model, uploaded_file):
         st.session_state.pred_mask = pred_mask
         st.session_state.mask_image = pred_mask.numpy()
         
-        # change session state variable to True
+        # change mask generated session state variable to True
         st.session_state.mask_generated = True
 
 def show_outline(model, uploaded_file):
+    """
+        Outline the mask on the original image and store it.
+    """
     with st.spinner("Outlining mask..."):
         # generate mask if not already generated
         if st.session_state.pred_mask is None:
@@ -149,7 +159,7 @@ def show_outline(model, uploaded_file):
         # Store the outlined image in session state
         st.session_state.outlined_image = pred_mask_outlined
         
-        # change session state variable to True
+        # change mask generated session state variable to True
         st.session_state.mask_generated = True
 
 def get_wound_pixel_area(pred_mask: tf.Tensor) -> float:
@@ -166,7 +176,9 @@ def get_wound_pixel_area(pred_mask: tf.Tensor) -> float:
     return sum(areas)
 
 def calc_area(model, uploaded_file):
-    """Calculate the area of the wound in cm²."""
+    """
+        Calculate the area of the wound in cm².
+    """
     with st.spinner("Calculating area..."):
         # Use existing mask if available
         if st.session_state.pred_mask is None:
@@ -186,6 +198,8 @@ def calc_area(model, uploaded_file):
         st.session_state.outlined_image = None  # Clear the outlined image to avoid confusion
         # Store the area result
         st.session_state.area_result = f"{area_cm2:.2f} cm²"
+
+# ----------------------------------------------------------------------------------------------------- #
 
 def run_app() -> None:
     """
