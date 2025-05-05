@@ -151,7 +151,7 @@ def show_mask(model, uploaded_file):
         st.session_state.mask_generated = True
     
     # Force a rerun to update the UI
-    st.experimental_rerun()
+    st.rerun()
 
 # def show_outline(model, uploaded_file):
 #     with st.spinner("Outlining mask..."):
@@ -190,7 +190,7 @@ def show_outline(model, uploaded_file):
         st.session_state.mask_generated = True
     
     # Force a rerun to update the UI
-    st.experimental_rerun()
+    st.rerun()
 
 def get_wound_pixel_area(pred_mask: tf.Tensor) -> float:
     """
@@ -245,7 +245,7 @@ def calc_area(model, uploaded_file):
         st.session_state.area_result = f"{area_cm2:.2f} cm²"
     
     # Force a rerun to update the UI
-    st.experimental_rerun()
+    st.rerun()
 
 def run_app() -> None:
     """
