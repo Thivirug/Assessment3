@@ -3,12 +3,6 @@
 *.pyc
 *.keras
 
-# Ignore images and other large files
-*.jpg
-*.jpeg
-*.gif
-*.Identifier
-
 # Ignore directories with large files
 data/
 Checkpoints/
