@@ -85,6 +85,9 @@ def run_app() -> None:
 
     # Limitations
     limitations()
+
+    # Acknowledgements
+    acknowledgements()
     
 if __name__ == "__main__":
     run_app()
