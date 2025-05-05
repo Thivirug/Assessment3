@@ -9,9 +9,9 @@ def run_app() -> None:
     )
 
     # Title 
-    st.title("About")
+    st.header("About", divider=True)
 
-    # First Row: About the App 
+    # About the App 
     
     # Determine the absolute path to the directory containing the script
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -20,9 +20,9 @@ def run_app() -> None:
 
     # Construct the absolute path to the destination file
     img_dir = os.path.join(BASE_DIR, "App", "Assets", "unet.jpg")
-    st.image(img_dir, caption="Another picture related to MedAI", use_container_width=True)
+    st.image(img_dir, caption="The U-Net", use_container_width=True)
     
-    st.subheader("More detailed description of MedAI's usage")
+    st.subheader("More detailed description of MedAI's usage", divider=True)
     st.markdown("""
         Our application uses deep learning to segment foot ulcers from clinical images. This allows medical professionals to quickly and accurately assess the size and severity of wounds.  
         
