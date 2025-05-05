@@ -19,8 +19,6 @@ if 'area_result' not in st.session_state: # to check if area result is generated
     st.session_state.area_result = None
 if 'pred_mask' not in st.session_state: # to check if prediction mask is generated
     st.session_state.pred_mask = None
-if 'original_shape' not in st.session_state: # to store original shape of image
-    st.session_state.original_shape = None
 
 def download_file_from_google_drive(destination):
     """
@@ -77,9 +75,6 @@ def preprocess_image(uploaded_file) -> tf.Tensor:
 
     # add batch dimension
     img = tf.expand_dims(img, axis=0)
-
-    # Store the original shape in session state
-    st.session_state.original_shape = original_shape
 
     return img, original_shape
 
