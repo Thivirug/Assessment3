@@ -163,44 +163,7 @@ def show_outline(model, uploaded_file):
         # change mask generated session state variable to True
         st.session_state.mask_generated = True
 
-def get_wound_pixel_area(pred_mask: tf.Tensor) -> float:
-    """
-        Calculate the area of the wound in pixels.
-    """
-    # get contours
-    contours, _ = cv2.findContours(pred_mask.numpy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    # calculate area for each contour
-    areas = [cv2.contourArea(contour=contour) for contour in contours]
-
-    # sum areas
-    return sum(areas)
-
-def calc_area(model, uploaded_file):
-    """
-        Calculate the area of the wound in cm².
-    """
-    with st.spinner("Calculating area..."):
-        # Use existing mask if available
-        if st.session_state.pred_mask is None:
-            pred_mask = generate_mask(model, uploaded_file)
-            st.session_state.pred_mask = pred_mask
-        else:
-            pred_mask = st.session_state.pred_mask
-        
-        # get pixel area
-        pixel_area = get_wound_pixel_area(pred_mask)
-
-        # convert to cm^2
-        SCALE = 0.01  # each pixel corresponds to 0.01 cm²
-        # !The scale depends on the resolution of the image
-
-        area_cm2 = pixel_area * SCALE
-        
-        st.session_state.mask_image = None  # Clear the mask image to avoid confusion
-        st.session_state.outlined_image = None  # Clear the outlined image to avoid confusion
-        # Store the area result
-        st.session_state.area_result = f"{area_cm2:.2f} cm²"
+# calculating area
 
 # ----------------------------------------------------------------------------------------------------- #
 
