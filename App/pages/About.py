@@ -105,6 +105,30 @@ def run_app() -> None:
 
     # Acknowledgements
     acknowledgements()
+
+    # add a navigation button to go back to the home page
+    st.markdown(
+        """
+        <style>
+            .stButton > button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    if st.button("Back to Home"):
+        st.session_state.page = "Home"
+        st.rerun()
     
 if __name__ == "__main__":
     run_app()
