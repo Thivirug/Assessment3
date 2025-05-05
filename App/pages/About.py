@@ -47,7 +47,21 @@ def limitations() -> None:
         * It is essential to consult a healthcare professional for accurate assessment and treatment.
     """)
 
+def future_improvements() -> None:
+    """
+        Display the future improvements for the application.
+    """
+    st.subheader("Future Improvements", divider=True)
+    st.markdown("""
+        * We plan to extend the model's capabilities to generalise better to different wound types.
+        * We aim to improve the accuracy of area calculation by implementing more advanced techniques.
+        * We will explore the use of additional data sources and advanced models to enhance performance.
+    """)
+
 def acknowledgements() -> None:
+    """
+        Display the acknowledgements.
+    """
     st.subheader("Acknowledgements", divider=True)
     st.markdown("""
         * We would like to thank our subject coordinator, Dr. Nabin and tutor Sudharshan for their guidance and support throughout this project.
@@ -85,6 +99,9 @@ def run_app() -> None:
 
     # Limitations
     limitations()
+
+    # Future improvements
+    future_improvements()
 
     # Acknowledgements
     acknowledgements()
