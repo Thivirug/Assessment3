@@ -8,9 +8,17 @@ import numpy as np
 import subprocess
 import os
 
-# initialise a session state variable for conditional rendering of area calc button
+# initialise a session state variables for conditional rendering 
 if 'mask_generated' not in st.session_state:
     st.session_state.mask_generated = False
+if 'outlined_image' not in st.session_state:
+    st.session_state.outlined_image = None
+if 'mask_image' not in st.session_state:
+    st.session_state.mask_image = None
+if 'area_result' not in st.session_state:
+    st.session_state.area_result = None
+if 'pred_mask' not in st.session_state:
+    st.session_state.pred_mask = None
 
 def download_file_from_google_drive(destination):
     """
@@ -113,39 +121,76 @@ def outline_mask(pred_mask: tf.Tensor, uploaded_file) -> np.ndarray:
 
     return img
 
-def show_mask(model, uploaded_file):
-    with st.spinner("Outlining mask..."):
+# def show_mask(model, uploaded_file):
+#     with st.spinner("Outlining mask..."):
             
+#         # generate mask
+#         pred_mask = generate_mask(model, uploaded_file)
+
+#         # outline mask
+#         # reset file pointer before passing to generate_mask
+#         uploaded_file.seek(0)
+#         pred_mask_outlined = outline_mask(pred_mask, uploaded_file)
+
+#         # display outlined mask
+#         st.image(pred_mask_outlined, caption='Outlined Mask', use_container_width=True)
+
+#     # change session state variable to True
+#     st.session_state.mask_generated = True
+
+def show_mask(model, uploaded_file):
+    with st.spinner("Generating mask..."):
         # generate mask
         pred_mask = generate_mask(model, uploaded_file)
+        
+        # Store the mask in session state
+        st.session_state.pred_mask = pred_mask
+        st.session_state.mask_image = pred_mask.numpy()
+        
+        # change session state variable to True
+        st.session_state.mask_generated = True
+    
+    # Force a rerun to update the UI
+    st.experimental_rerun()
 
-        # outline mask
-        # reset file pointer before passing to generate_mask
-        uploaded_file.seek(0)
-        pred_mask_outlined = outline_mask(pred_mask, uploaded_file)
+# def show_outline(model, uploaded_file):
+#     with st.spinner("Outlining mask..."):
+        
+#         # generate mask
+#         pred_mask = generate_mask(model, uploaded_file)
 
-        # display outlined mask
-        st.image(pred_mask_outlined, caption='Outlined Mask', use_container_width=True)
+#         # outline mask
+#         # reset file pointer before passing to generate_mask
+#         uploaded_file.seek(0)
+#         pred_mask_outlined = outline_mask(pred_mask, uploaded_file)
 
-    # change session state variable to True
-    st.session_state.mask_generated = True
+#         # display outlined mask
+#         st.image(pred_mask_outlined, caption='Outlined Mask', use_container_width=True)
+
+#     # change session state variable to True
+#     st.session_state.mask_generated = True
 
 def show_outline(model, uploaded_file):
     with st.spinner("Outlining mask..."):
+        # generate mask if not already generated
+        if st.session_state.pred_mask is None:
+            pred_mask = generate_mask(model, uploaded_file)
+            st.session_state.pred_mask = pred_mask
+        else:
+            pred_mask = st.session_state.pred_mask
         
-        # generate mask
-        pred_mask = generate_mask(model, uploaded_file)
-
-        # outline mask
-        # reset file pointer before passing to generate_mask
+        # reset file pointer before passing to outline_mask
         uploaded_file.seek(0)
         pred_mask_outlined = outline_mask(pred_mask, uploaded_file)
-
-        # display outlined mask
-        st.image(pred_mask_outlined, caption='Outlined Mask', use_container_width=True)
-
-    # change session state variable to True
-    st.session_state.mask_generated = True
+        
+        # Store the outlined image in session state
+        st.session_state.outlined_image = pred_mask_outlined
+        
+        # change session state variable to True
+        st.session_state.mask_generated = True
+    
+    # Force a rerun to update the UI
+    st.experimental_rerun()
 
 def get_wound_pixel_area(pred_mask: tf.Tensor) -> float:
     """
@@ -160,24 +205,47 @@ def get_wound_pixel_area(pred_mask: tf.Tensor) -> float:
     # sum areas
     return sum(areas)
     
-# calculate true wound area
-def calc_area(model, uploaded_file) -> None:
-    """
-        Calculate the area of the wound in cm².
-    """
-    # generate mask
-    pred_mask = generate_mask(model, uploaded_file)
-    
-    # get pixel area
-    pixel_area = get_wound_pixel_area(pred_mask)
+# # calculate true wound area
+# def calc_area(model, uploaded_file) -> None:
+#     """
+#         Calculate the area of the wound in cm².
+#     """
+#     # generate mask
+#     pred_mask = generate_mask(model, uploaded_file)
 
-    # convert to cm^2
-    scale_factor = 0.01  # Assuming each pixel corresponds to 0.01 cm²
-    area_cm2 = pixel_area * scale_factor
+#     # get pixel area
+#     pixel_area = get_wound_pixel_area(pred_mask)
+
+#     # convert to cm^2
+#     scale_factor = 0.01  # Assuming each pixel corresponds to 0.01 cm²
+#     area_cm2 = pixel_area * scale_factor
     
-    # show area as a badge
+#     # show area as a badge
+#     with st.spinner("Calculating area..."):
+#         st.success(f"Area of the wound: {area_cm2:.2f} cm²", icon="✅")
+
+def calc_area(model, uploaded_file):
+    """Calculate the area of the wound in cm²."""
     with st.spinner("Calculating area..."):
-        st.success(f"Area of the wound: {area_cm2:.2f} cm²", icon="✅")
+        # Use existing mask if available
+        if st.session_state.pred_mask is None:
+            pred_mask = generate_mask(model, uploaded_file)
+            st.session_state.pred_mask = pred_mask
+        else:
+            pred_mask = st.session_state.pred_mask
+        
+        # get pixel area
+        pixel_area = get_wound_pixel_area(pred_mask)
+
+        # convert to cm^2
+        scale_factor = 0.01  # Assuming each pixel corresponds to 0.01 cm²
+        area_cm2 = pixel_area * scale_factor
+        
+        # Store the area result
+        st.session_state.area_result = f"{area_cm2:.2f} cm²"
+    
+    # Force a rerun to update the UI
+    st.experimental_rerun()
 
 def run_app() -> None:
     """
@@ -205,14 +273,31 @@ def run_app() -> None:
     # download model if it doesn't exist and load it
     model = get_model(destination)
 
+    # if uploaded_file is not None:
+    #     # read image
+    #     img = Image.open(uploaded_file).convert("RGB")
+
+    #     # reset file pointer before passing to generate_mask
+    #     uploaded_file.seek(0)
+
+    #     # display image
+    #     st.image(img, caption='Uploaded Image.', use_container_width=True)
+
+    #     # display buttons
+    #     col1, col2, col3 = st.columns(3)
+    #     with col1:
+    #         st.button("Generate Mask", on_click=show_mask, args=(model, uploaded_file))
+    #     with col2:
+    #         st.button("Show Mask on Image", on_click=show_outline, args=(model, uploaded_file))
+    #     # show area calc button after btn1 or btn2 are clicked
+    #     with col3:
+    #         if st.session_state.mask_generated:
+    #             st.button("Calculate Area", on_click=calc_area, args=(model, uploaded_file))
+
     if uploaded_file is not None:
-        # read image
+        # Always display the original image first
         img = Image.open(uploaded_file).convert("RGB")
-
-        # reset file pointer before passing to generate_mask
-        uploaded_file.seek(0)
-
-        # display image
+        uploaded_file.seek(0)  # Reset file pointer
         st.image(img, caption='Uploaded Image.', use_container_width=True)
 
         # display buttons
@@ -225,6 +310,16 @@ def run_app() -> None:
         with col3:
             if st.session_state.mask_generated:
                 st.button("Calculate Area", on_click=calc_area, args=(model, uploaded_file))
+
+        # Display results based on session state
+        if st.session_state.mask_image is not None:
+            st.image(st.session_state.mask_image, caption='Generated Mask', use_container_width=True)
+        
+        if st.session_state.outlined_image is not None:
+            st.image(st.session_state.outlined_image, caption='Outlined Mask', use_container_width=True)
+        
+        if st.session_state.area_result is not None:
+            st.success(f"Area of the wound: {st.session_state.area_result}", icon="✅")
 
 # call in main
 if __name__ == "__main__":
