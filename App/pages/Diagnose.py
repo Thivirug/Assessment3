@@ -8,6 +8,10 @@ import numpy as np
 import subprocess
 import os
 
+# initialise a session state variable for conditional rendering of area calc button
+if 'mask_generated' not in st.session_state:
+    st.session_state.mask_generated = False
+
 def download_file_from_google_drive(destination):
     """
         Download the model file from Google Drive.
@@ -107,11 +111,70 @@ def outline_mask(pred_mask: tf.Tensor, uploaded_file) -> np.ndarray:
     # convert back to RGB for display
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-
     return img
 
-# # calculate area
-# def calc_area() -> float:
+def show_mask(model, uploaded_file):
+    with st.spinner("Outlining mask..."):
+            
+        # generate mask
+        pred_mask = generate_mask(model, uploaded_file)
+
+        # outline mask
+        # reset file pointer before passing to generate_mask
+        uploaded_file.seek(0)
+        pred_mask_outlined = outline_mask(pred_mask, uploaded_file)
+
+        # display outlined mask
+        st.image(pred_mask_outlined, caption='Outlined Mask', use_container_width=True)
+
+    # change session state variable to True
+    st.session_state.mask_generated = True
+
+def show_outline(model, uploaded_file):
+    with st.spinner("Outlining mask..."):
+        
+        # generate mask
+        pred_mask = generate_mask(model, uploaded_file)
+
+        # outline mask
+        # reset file pointer before passing to generate_mask
+        uploaded_file.seek(0)
+        pred_mask_outlined = outline_mask(pred_mask, uploaded_file)
+
+        # display outlined mask
+        st.image(pred_mask_outlined, caption='Outlined Mask', use_container_width=True)
+
+    # change session state variable to True
+    st.session_state.mask_generated = True
+
+def get_wound_pixel_area(pred_mask: tf.Tensor) -> float:
+    """
+        Calculate the area of the wound in pixels.
+    """
+    # get contours
+    contours, _ = cv2.findContours(pred_mask.numpy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # calculate area for each contour
+    areas = [cv2.contourArea(contour=contour) for contour in contours]
+
+    # sum areas
+    return sum(areas)
+    
+# calculate true wound area
+def calc_area(pred_mask: tf.Tensor):
+    """
+        Calculate the area of the wound in cm².
+    """
+    # get pixel area
+    pixel_area = get_wound_pixel_area(pred_mask)
+
+    # convert to cm^2
+    scale_factor = 0.01  # Assuming each pixel corresponds to 0.01 cm²
+    area_cm2 = pixel_area * scale_factor
+    
+    # show area as a badge
+    with st.spinner("Calculating area..."):
+        st.success(f"Area of the wound: {area_cm2:.2f} cm²", icon="✅")
 
 def run_app() -> None:
     """
@@ -149,30 +212,16 @@ def run_app() -> None:
         # display image
         st.image(img, caption='Uploaded Image.', use_container_width=True)
 
-        # generate predicted mask
-        if st.button("Generate Mask"):
-            with st.spinner("Generating mask..."):
-                
-                # generate mask
-                pred_mask = generate_mask(model, uploaded_file)
-
-                # display mask
-                st.image(pred_mask.numpy(), caption='Predicted Mask.', use_container_width=True)
-        
-        # outline the mask on the original image
-        if st.button("Show Mask on Image"):
-            with st.spinner("Outlining mask..."):
-                
-                # generate mask
-                pred_mask = generate_mask(model, uploaded_file)
-
-                # outline mask
-                # reset file pointer before passing to generate_mask
-                uploaded_file.seek(0)
-                pred_mask_outlined = outline_mask(pred_mask, uploaded_file)
-
-                # display outlined mask
-                st.image(pred_mask_outlined, caption='Outlined Mask', use_container_width=True)
+        # display buttons
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.button("Generate Mask", on_click=show_mask, args=(model, uploaded_file))
+        with col2:
+            st.button("Show Mask on Image", on_click=show_outline, args=(model, uploaded_file))
+        # show area calc button after btn1 or btn2 are clicked
+        with col3:
+            if st.session_state.mask_generated:
+                st.button("Calculate Area", on_click=calc_area, args=(model, uploaded_file))
 
 # call in main
 if __name__ == "__main__":
