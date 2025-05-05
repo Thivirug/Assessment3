@@ -7,8 +7,8 @@ def model_info() -> None:
     """
     st.subheader("Model Information", divider=True)
     st.markdown("""
-        The model used is a U-Net architecture, which is a convolutional neural network (CNN) designed for image segmentation tasks. 
-        It consists of an encoder-decoder structure with skip connections, allowing it to capture both local and global features effectively.
+        * The model used is a U-Net architecture, which is a convolutional neural network (CNN) designed for image segmentation tasks. 
+        *   It consists of an encoder-decoder structure with skip connections, allowing it to capture both local and global features effectively.
     """)
 
 def dataset_info() -> None:
@@ -25,6 +25,35 @@ def dataset_info() -> None:
         We performed data augmentation with Albumentations, increasing the dataset to 4860 training samples. Each image is paired with a binary mask used for segmentation.
     """)
 
+def application_info() -> None:
+    """
+        Display the application information.
+    """
+    st.subheader("Application", divider=True)
+    st.markdown("""
+        * This tool assists healthcare professionals in identifying and segmenting wounds from clinical images. 
+        * It can be used to monitor wound healing and guide treatment planning.
+    """)
+
+def limitations() -> None:
+    """
+        Display the limitations of the application.
+    """
+    st.subheader("Limitations", divider=True)
+    st.markdown("""
+        * May not generalise well to some wound types or low-quality images.
+        * Area calculation may not be scientifically accurate due to the simple approach used. 
+        * The model is not a substitute for professional medical advice or diagnosis.
+        * It is essential to consult a healthcare professional for accurate assessment and treatment.
+    """)
+
+def acknowledgements() -> None:
+    st.subheader("Acknowledgements", divider=True)
+    st.markdown("""
+    - Dataset: [Foot Ulcer Challenge](https://example-link.com)  
+    - Augmentation: Albumentations  
+    - Model Architecture inspired by U-Net (Ronneberger et al., 2015)
+    """)
 def run_app() -> None:
     # Set up the page configuration
     st.set_page_config(
@@ -47,11 +76,14 @@ def run_app() -> None:
     # Model information
     model_info()
 
-    # Divider
-    st.markdown("---")
-
     # Dataset information
     dataset_info()
+
+    # Application information
+    application_info()
+
+    # Limitations
+    limitations()
     
 if __name__ == "__main__":
     run_app()
