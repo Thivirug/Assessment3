@@ -18,10 +18,8 @@ def run_app() -> None:
     - **Thiviru Gunawardena (14542791) : [thiviru.gunawardena@student.uts.edu.au](mailto:thiviru.gunawardena@student.uts.edu.au)** 
             
             Data Collection, Model Training, & Model Deployment
-                
     - **Jachym Zamouril (25639802) : [Jachym.Zamouril@student.uts.edu.au](mailto:Jachym.Zamouril@student.uts.edu.au)** 
-            Frontend Development & Documentation
-                
+            Frontend Development & Documentation 
     - **Carlos Daroy (24752370) : [Carlos.Daroy@student.uts.edu.au](mailto:Carlos.Daroy@student.uts.edu.au)** 
             Model Evaluation, Area Calculation, & Documentation  
     """)
