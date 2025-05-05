@@ -24,12 +24,13 @@ def download_file_from_google_drive(destination):
     """
         Download the model file from Google Drive.
     """
-    # # Google Drive file ID
-    # file_id = "1WDYIePeP_QSA4A1ueS2Ex3k096EhWqq2"
     # Access the file ID from Streamlit secrets
     file_id = st.secrets["model_file_id"]
 
+    # create the directory if it doesn't exist
     os.makedirs(os.path.dirname(destination), exist_ok=True)
+
+    # use subprocess to run gdown command
     subprocess.run(["gdown", "--id", file_id, "-O", destination], check=True)
 
 @st.cache_resource # Decorator to cache non-data objects
