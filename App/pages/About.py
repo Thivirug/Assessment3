@@ -8,7 +8,7 @@ def model_info() -> None:
     st.subheader("Model Information", divider=True)
     st.markdown("""
         * The model used is a U-Net architecture, which is a convolutional neural network (CNN) designed for image segmentation tasks. 
-        *   It consists of an encoder-decoder structure with skip connections, allowing it to capture both local and global features effectively.
+        * It consists of an encoder-decoder structure with skip connections, allowing it to capture both local and global features effectively.
     """)
 
 def dataset_info() -> None:
@@ -50,10 +50,11 @@ def limitations() -> None:
 def acknowledgements() -> None:
     st.subheader("Acknowledgements", divider=True)
     st.markdown("""
-    - Dataset: [Foot Ulcer Challenge](https://example-link.com)  
-    - Augmentation: Albumentations  
-    - Model Architecture inspired by U-Net (Ronneberger et al., 2015)
+        * We would like to thank our subject coordinator, Dr. Nabin and tutor Sudharshan for their guidance and support throughout this project.
+        * We acknowledge the use of the Foot Ulcer Segmentation Challenge dataset for training and evaluating our model. : https://github.com/uwm-bigdata/wound-segmentation/tree/master/data/Foot%20Ulcer%20Segmentation%20Challenge
+        * The U-Net architecture was inspired by the original paper by Ronneberger et al. (2015). : https://arxiv.org/abs/1505.04597
     """)
+
 def run_app() -> None:
     # Set up the page configuration
     st.set_page_config(
