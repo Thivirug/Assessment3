@@ -13,7 +13,7 @@ def run_app() -> None:
     # First Row: About the App 
     col1, col2 = st.columns(2)
     with col1:
-        st.image("../App/Assets/unet.jpg", caption="Another picture related to MedAI", use_container_width=True)
+        st.image("../Assets/unet.jpg", caption="Another picture related to MedAI", use_container_width=True)
     with col2:
         st.subheader("More detailed description of MedAI's usage")
         st.markdown("""
