@@ -9,26 +9,25 @@ def run_app() -> None:
     )
 
     # Title 
-    st.title("About us")
+    st.title("About")
 
     # First Row: About the App 
-    col1, col2 = st.columns(2)
-    with col1:
-         # Determine the absolute path to the directory containing the script
-        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-        # go back two directories to reach the root directory (assessment3)
-        BASE_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir, os.pardir))
+    
+    # Determine the absolute path to the directory containing the script
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # go back two directories to reach the root directory (assessment3)
+    BASE_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir, os.pardir))
 
-        # Construct the absolute path to the destination file
-        img_dir = os.path.join(BASE_DIR, "App", "Assets", "unet.jpg")
-        st.image(img_dir, caption="Another picture related to MedAI", use_container_width=True)
-    with col2:
-        st.subheader("More detailed description of MedAI's usage")
-        st.markdown("""
-            Our application uses deep learning to segment foot ulcers from clinical images. This allows medical professionals to quickly and accurately assess the size and severity of wounds.  
-           
-            The goal is to provide an easy-to-use, real-time tool that automates wound segmentation and helps calculate surface area using a reference marker.
-        """)
+    # Construct the absolute path to the destination file
+    img_dir = os.path.join(BASE_DIR, "App", "Assets", "unet.jpg")
+    st.image(img_dir, caption="Another picture related to MedAI", use_container_width=True)
+    
+    st.subheader("More detailed description of MedAI's usage")
+    st.markdown("""
+        Our application uses deep learning to segment foot ulcers from clinical images. This allows medical professionals to quickly and accurately assess the size and severity of wounds.  
+        
+        The goal is to provide an easy-to-use, real-time tool that automates wound segmentation and helps calculate surface area using a reference marker.
+    """)
 
     # Divider
     st.markdown("---")

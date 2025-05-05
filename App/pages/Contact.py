@@ -6,7 +6,7 @@ def run_app() -> None:
         page_title="Contact Us",
         page_icon="✉️"
     )
-    
+
     st.title("Contact us")
 
     st.markdown("### Thiviru Gunawardena – 14542791 – [thirivu.gunawardena@student.uts.edu.au](mailto:thirivu.gunawardena@student.uts.edu.au)")
