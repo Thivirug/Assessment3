@@ -70,10 +70,6 @@ def acknowledgements() -> None:
     """)
 
 def run_app() -> None:
-    # Ensure page_selection exists in session_state
-    if "page_selection" not in st.session_state:
-        st.session_state.page_selection = {}
-        
     # Set up the page configuration
     st.set_page_config(
         page_title="About",
@@ -109,13 +105,6 @@ def run_app() -> None:
 
     # Acknowledgements
     acknowledgements()
-
-    # add a navigation button to go back to the home page
-    st.button("Back to Home", on_click=lambda: st.session_state.page_selection.update({"Home": True}))
-    # add a navigation button to go to the contact page
-    st.button("Contact Us", on_click=lambda: st.session_state.page_selection.update({"Contact": True}))
-    # add a navigation button to go to the prediction page
-    st.button("Generate Mask", on_click=lambda: st.session_state.page_selection.update({"Generate Mask": True}))
     
 if __name__ == "__main__":
     run_app()
