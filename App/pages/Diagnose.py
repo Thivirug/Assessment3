@@ -235,6 +235,8 @@ def calc_area(model, uploaded_file):
         scale_factor = 0.01  # Assuming each pixel corresponds to 0.01 cm²
         area_cm2 = pixel_area * scale_factor
         
+        st.session_state.mask_image = None  # Clear the mask image to avoid confusion
+        st.session_state.outlined_image = None  # Clear the outlined image to avoid confusion
         # Store the area result
         st.session_state.area_result = f"{area_cm2:.2f} cm²"
 
