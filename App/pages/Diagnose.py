@@ -161,10 +161,13 @@ def get_wound_pixel_area(pred_mask: tf.Tensor) -> float:
     return sum(areas)
     
 # calculate true wound area
-def calc_area(pred_mask: tf.Tensor):
+def calc_area(model, uploaded_file) -> None:
     """
         Calculate the area of the wound in cm².
     """
+    # generate mask
+    pred_mask = generate_mask(model, uploaded_file)
+    
     # get pixel area
     pixel_area = get_wound_pixel_area(pred_mask)
 
