@@ -9,3 +9,4 @@ Checkpoints/
 
 # Model ID 
 *.toml
+*.streamlit/
