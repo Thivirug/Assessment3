@@ -47,7 +47,3 @@ def calc_area(image: tf.Tensor, predicted_mask: np.ndarray) -> float:
 
     return area
 
-mask = cv2.imread('test1_predicted.png', cv2.IMREAD_GRAYSCALE)
-area = calc_area('test1.png', mask)
-
-print(f"Area of the wound is {area} cm^2")
