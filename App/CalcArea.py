@@ -1,14 +1,14 @@
 import cv2
 import numpy as np
+import tensorflow as tf
 
-def calc_area(filepath, predicted_mask: np.ndarray) -> float:
+def calc_area(image: tf.Tensor, predicted_mask: np.ndarray) -> float:
     """
         Calculate the area of the segmented region in the mask.
     """
     # get amount of pixels in one squared centimeter
 
-    image = cv2.imread(filepath)
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image_gray = cv2.cvtColor(image.numpy(), cv2.COLOR_RGB2GRAY) # tf images are in RGB format
     
     ret, corners = cv2.findChessboardCorners(image_gray, (5,5), None)
     if ret:

@@ -1,1 +1,10 @@
-1) Prepare and capture the image
+This code defines a function to calculate the real-world area (in cm²) of a segmented region (such as a wound) in an image, 
+using a reference chessboard grid for scale. 
+
+1) It reads the input image (The wound image with a reference placed next to it) and converts it to grayscale.
+2) It detects a 5x5 chessboard pattern in the image to use as a reference for real-world measurements.
+3) It calculates the mean distance between adjacent chessboard corners to estimate the size of one square in pixels.
+4) It computes the area of one square in pixels (mean distance squared).
+5) It counts the number of nonzero pixels in the predicted mask (the segmented region).
+6) It divides the mask pixel count by the area of one square to estimate the real-world area in cm².
+7) If the chessboard is not found, it raises an error.
