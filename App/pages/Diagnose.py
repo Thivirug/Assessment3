@@ -221,6 +221,9 @@ def area_(model, uploaded_file) -> float:
         # read image
         img, _ = prep_img(uploaded_file)
 
+        # convert pred_mask to numpy array
+        pred_mask = pred_mask.numpy()
+        
         # calculate area
         area_cm2 = calc_area(img, pred_mask)
 
