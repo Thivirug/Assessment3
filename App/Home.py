@@ -31,6 +31,29 @@ def page_info() -> None:
     with col3:
         st.write("Upload your wound image and get the segmented mask and area calculation.")
 
+def display_samples() -> None:
+    """
+        Display sample input images.
+    """
+    st.subheader("Sample Input Images and Predictions", divider=True)
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.image("App/Assets/test3.png", caption="Sample Input Image 1")
+        st.image("App/Assets/test3Pred.png", caption="Sample Prediction Image 1")
+        st.image("App/Assets/test3Area.png", caption="Area Displayed")
+    with col2:
+        st.image("App/Assets/test6.png", caption="Sample Input Image 2")
+        st.image("App/Assets/test6Pred.png", caption="Sample Prediction Image 2")
+        st.image("App/Assets/test6Area.png", caption="Area Displayed")
+
+    # Add a horizontal line
+    st.markdown(
+        """
+        ---
+        """
+    )
+
 def run() -> None:
     """
         Run the Streamlit app's entry point.
@@ -69,9 +92,16 @@ def run() -> None:
         3. The segmented area will be displayed along with the original image.
 
         ---
-
-        **👈 Navigate to Pages**
     """
+    )
+
+    # display sample input images
+    display_samples()
+
+    st.markdown(
+        """
+        **👈 Navigate to Pages**
+        """
     )
 
     # display the page information
