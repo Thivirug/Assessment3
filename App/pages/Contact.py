@@ -21,11 +21,11 @@ def run_app() -> None:
                 
     - **Jachym Zamouril (25639802) : [Jachym.Zamouril@student.uts.edu.au](mailto:Jachym.Zamouril@student.uts.edu.au)** 
                 
-            Frontend Development & Documentation 
+            Model Evaluation, Area Calculation, & Documentation  
                 
     - **Carlos Daroy (24752370) : [Carlos.Daroy@student.uts.edu.au](mailto:Carlos.Daroy@student.uts.edu.au)** 
                 
-            Model Evaluation, Area Calculation, & Documentation  
+            Frontend Development & Documentation 
     """)
 
     st.markdown("""
