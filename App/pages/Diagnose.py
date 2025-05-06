@@ -272,7 +272,7 @@ def run_app() -> None:
         # show area calc button after btn1 or btn2 are clicked
         with col3:
             if st.session_state.mask_generated:
-                st.button("Calculate Area", on_click=calc_area, args=(model, uploaded_file))
+                st.button("Calculate Area", on_click=area_, args=(model, uploaded_file))
 
         # Display results based on session state
         if st.session_state.mask_image is not None:
