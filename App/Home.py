@@ -40,7 +40,7 @@ def display_samples() -> None:
 
     with col1:
         st.image("App/Assets/test3.png", caption="Sample Input Image 1")
-        st.image("App/Assets/test3Pred.png", caption="Sample Prediction Image 1")
+        st.image("Assets/test3Pred.jpg", caption="Sample Prediction Image 1")
         st.image("App/Assets/test3Area.png", caption="Area Displayed")
     with col2:
         st.image("App/Assets/test6.png", caption="Sample Input Image 2")
