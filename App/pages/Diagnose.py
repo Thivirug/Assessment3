@@ -8,7 +8,7 @@ import numpy as np
 import subprocess
 import os
 # import calc_area function from CalcArea.py
-from ..CalcArea import calc_area
+from CalcArea import calc_area
 
 # initialise session state variables for conditional rendering 
 if 'mask_generated' not in st.session_state: # to check if mask is generated
