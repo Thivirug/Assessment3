@@ -217,6 +217,8 @@ def area_(model, uploaded_file) -> float:
             pred_mask = st.session_state.pred_mask
         
         # get the original image
+        uploaded_file.seek(0)
+        # read image
         img, _ = prep_img(uploaded_file)
 
         # calculate area
