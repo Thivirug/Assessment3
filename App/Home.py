@@ -64,7 +64,7 @@ def run() -> None:
         Additionally, it outputs the area of the wounded region in square centimeters (cm²) for your convenience.
 
         ### How to Use:
-        1. Upload your wound image in JPG, JPEG, or PNG format.
+        1. Upload your wound image along with the reference in JPG, JPEG, or PNG format.
         2. The model will process the image and generate a segmented mask.
         3. The segmented area will be displayed along with the original image.
 
