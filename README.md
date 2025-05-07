@@ -14,11 +14,11 @@ This project provides a Streamlit web application for automatic wound segmentati
   - `pages/` - Streamlit multipage support
   - `CalcArea.py` - Area calculation logic
   - `Unet.py` - U-Net model definition
-  - `Assets/` - Static assets (if any)
-- `Checkpoints/` - Trained model weights (`unet_best_model.keras`)
-- `data/` - Image datasets
+  - `Assets/` - Static assets used in the app
+- `Checkpoints/` - Trained Unet model (Not included in the repo)
+- `data/` - Image datasets (Not included in the repo)
 - `requirements.txt` - Python dependencies
-- `main.ipynb` - Example notebook for predictions
+- `main.ipynb` - Notebook for model training and evaluation
 
 ## Setup
 1. **Install dependencies:**
@@ -42,5 +42,3 @@ This project provides a Streamlit web application for automatic wound segmentati
 - The area calculation requires a clear 5x5 chessboard pattern in the image for scale. If not found, an error will be shown.
 - For best results, ensure good lighting and minimal occlusion of the reference grid.
 
-## License
-This project is for academic use only.
