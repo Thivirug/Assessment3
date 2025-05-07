@@ -22,6 +22,8 @@ if 'area_result' not in st.session_state: # to check if area result is generated
     st.session_state.area_result = None
 if 'pred_mask' not in st.session_state: # to check if prediction mask is generated
     st.session_state.pred_mask = None
+if 'area_error' not in st.session_state: # to check if area error is generated
+    st.session_state.area_error = None
 
 def download_file_from_google_drive(destination):
     """
@@ -185,10 +187,12 @@ def area_(model, uploaded_file) -> float:
         # catch the ValueError if the reference grid is not found
         try:
             area_cm2 = calc_area(img, pred_mask)
+            # Store the area result in session state
             st.session_state.area_result = f"{area_cm2:.2f} cm²"
         except ValueError as e:
             st.session_state.area_result = None
-            st.error(str(e))
+            # Store the error message in session state
+            st.session_state.area_error = str(e)
 
         # reset session state variables to remove predicted mask
         st.session_state.mask_image = None
@@ -267,13 +271,16 @@ def run_app() -> None:
             st.image(st.session_state.outlined_image, caption='Outlined Mask', use_container_width=True)
         
         if st.session_state.area_result is not None:
-            # if a value error occurs, display the error message
-            if isinstance(st.session_state.area_result, str) and "Reference grid not found in the image." in st.session_state.area_result:
-                st.error(st.session_state.area_result, icon="🚨")
-            else:
-                # display area result
-                st.success(f"Area of the wound: {st.session_state.area_result}", icon="✅")
-
+            # display area result
+            st.success(f"Area of the wound: {st.session_state.area_result}", icon="✅")
+            # reset session state variable to remove area result
+            st.session_state.area_result = None
+        elif st.session_state.area_error is not None:
+            # display area error
+            st.error(st.session_state.area_error, icon="🚨")
+            # reset session state variable to remove error message
+            st.session_state.area_error = None
+                
 # call in main
 if __name__ == "__main__":
     run_app()
