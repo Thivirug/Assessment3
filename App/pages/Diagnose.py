@@ -177,23 +177,22 @@ def area_(model, uploaded_file) -> float:
             st.session_state.pred_mask = pred_mask
         else:
             pred_mask = st.session_state.pred_mask
-        
-        # get the original image
         uploaded_file.seek(0)
-        # read image
+        # get the image in proper format
         img, _ = prep_img(uploaded_file)
-
-        # convert pred_mask to numpy array
         pred_mask = pred_mask.numpy()
-        
-        # calculate area
-        area_cm2 = calc_area(img, pred_mask)
 
-        st.session_state.mask_image = None  # Clear the mask image to avoid confusion
-        st.session_state.outlined_image = None  # Clear the outlined image to avoid confusion
-        # Store the area result
-        st.session_state.area_result = f"{area_cm2:.2f} cm²"
+        # catch the ValueError if the reference grid is not found
+        try:
+            area_cm2 = calc_area(img, pred_mask)
+            st.session_state.area_result = f"{area_cm2:.2f} cm²"
+        except ValueError as e:
+            st.session_state.area_result = None
+            st.error(str(e))
 
+        # reset session state variables to remove predicted mask
+        st.session_state.mask_image = None
+        st.session_state.outlined_image = None
 # ----------------------------------------------------------------------------------------------------- #
 
 def run_app() -> None:
