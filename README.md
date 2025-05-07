@@ -59,7 +59,7 @@ Assessment3/
 3. Click **"Show Mask on Image"** to visualise the mask outline.
 4. Click **"Calculate Area"** to compute the wound area in cm².
 
-> **Tip:** For best results, ensure good lighting and minimal occlusion of the reference grid.
+> **Tip:** For best results, ensure good lighting, use a black and white reference grid, and maintain a considerable gap between the wound and the reference.
 
 ---
 
