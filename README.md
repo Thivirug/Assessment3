@@ -1,26 +1,44 @@
-# Assessment3: Wound Segmentation and Area Calculation
+# 🩺 MedAI 
+## Assessment3: Wound Segmentation & Area Calculation
 
-This project provides a Streamlit web application for automatic wound segmentation and area calculation using deep learning (U-Net) and computer vision techniques.
+A user-friendly Streamlit app for automatic wound segmentation and area measurement using deep learning and computer vision.
 
-## Features
-- Upload wound images with a reference grid (5x5 chessboard pattern)
-- Generate segmentation masks using a trained U-Net model
-- Visualise the mask and its outline on the original image
-- Calculate the wound area in cm² using the reference grid for scale
-- User-friendly interface with error handling
+---
 
-## Project Structure
-- `App/` - Main application code
-  - `pages/` - Streamlit multipage support
-  - `CalcArea.py` - Area calculation logic
-  - `Unet.py` - U-Net model definition
-  - `Assets/` - Static assets used in the app
-- `Checkpoints/` - Trained Unet model (Not included in the repo)
-- `data/` - Image datasets (Not included in the repo)
-- `requirements.txt` - Python dependencies
-- `main.ipynb` - Notebook for model training and evaluation
+## 🚀 Features
 
-## Setup
+- 📤 **Upload wound images** with a 5x5 chessboard reference grid
+- 🤖 **Automatic segmentation** using a trained U-Net model
+- 🖼️ **Visualise masks** and outlines on the original image
+- 📏 **Calculate wound area** in cm² using the reference grid for scale
+- ⚠️ **Robust error handling** and clear user feedback
+
+---
+
+## 🗂️ Project Structure
+
+```
+Assessment3/
+│
+├── App/                # Main application code
+│   ├── Home.py         # Streamlit app entry point
+│   ├── pages/          # Streamlit multipage support
+│   ├── CalcArea.py     # Area calculation script
+│   ├── Unet.py         # U-Net model definition
+│   └── Assets/         # Static assets
+│
+├── Checkpoints/        # Trained model weights (Not included in repo)
+├── data/               # Image datasets (Not included in repo)
+├── requirements.txt    # Python dependencies
+├── main.ipynb          # Comprehensive Jupyter notebook for data exploration, model training, and evaluation
+├── LICENSE             # Project license
+└── README.md           # Project documentation
+```
+
+---
+
+## ⚙️ Setup
+
 1. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
@@ -32,13 +50,27 @@ This project provides a Streamlit web application for automatic wound segmentati
    streamlit run App/Home.py
    ```
 
-## Usage
-- Upload a wound image with a visible 5x5 chessboard reference grid.
-- Click "Generate Mask" to segment the wound.
-- Click "Show Mask on Image" to visualize the mask outline.
-- Click "Calculate Area" to compute the wound area in cm².
+---
 
-## Notes
+## 📝 Usage Guide
+
+1. **Upload** a wound image with a visible 5x5 chessboard reference grid.
+2. Click **"Generate Mask"** to segment the wound.
+3. Click **"Show Mask on Image"** to visualise the mask outline.
+4. Click **"Calculate Area"** to compute the wound area in cm².
+
+> **Tip:** For best results, ensure good lighting and minimal occlusion of the reference grid.
+
+---
+
+## ❗ Notes
+
 - The area calculation requires a clear 5x5 chessboard pattern in the image for scale. If not found, an error will be shown.
-- For best results, ensure good lighting and minimal occlusion of the reference grid.
+- All processing is local; your images are not uploaded to any server.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
