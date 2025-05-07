@@ -1,5 +1,4 @@
 # Ignore large model files
-*.pb
 *.pyc
 *.keras
 
@@ -7,6 +6,6 @@
 data/
 Checkpoints/
 
-# Model ID 
+# Model secrets
 *.toml
 *.streamlit/
