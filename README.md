@@ -1,5 +1,5 @@
 # 🩺 MedAI 
-## Assessment3: Wound Segmentation & Area Calculation
+## Wound Segmentation & Area Calculation
 
 A user-friendly Streamlit app for automatic wound segmentation and area measurement using deep learning and computer vision.
 
