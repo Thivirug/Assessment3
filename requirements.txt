@@ -1,12 +1,12 @@
 # opencv-python-headless is used instead of opencv-python to avoid unnecessary GUI dependencies
 # gdown is used to download the model from Google Drive
 # albumentations is used for data augmentation
-# matplotlib is used for plotting images
+# matplotlib is used for plotting graphs and images
 # numpy is used for numerical operations
 # uuid is used to generate unique IDs for the images
 # streamlit is used for creating the web application
 # tensorflow and keras are used for building and training the deep learning model
-# Pillow is used for image processing
+# pillow is used for opening and manipulating images
 
 streamlit
 tensorflow
