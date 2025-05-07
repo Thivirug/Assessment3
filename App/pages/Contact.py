@@ -21,7 +21,7 @@ def run_app() -> None:
                 
     - **Jachym Zamouril (25639802) : [Jachym.Zamouril@student.uts.edu.au](mailto:Jachym.Zamouril@student.uts.edu.au)** 
                 
-            Model Evaluation, Area Calculation, & Documentation  
+            Model Evaluation & Area Calculation
                 
     - **Carlos Daroy (24752370) : [Carlos.Daroy@student.uts.edu.au](mailto:Carlos.Daroy@student.uts.edu.au)** 
                 
