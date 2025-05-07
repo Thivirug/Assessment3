@@ -268,7 +268,12 @@ def run_app() -> None:
             st.image(st.session_state.outlined_image, caption='Outlined Mask', use_container_width=True)
         
         if st.session_state.area_result is not None:
-            st.success(f"Area of the wound: {st.session_state.area_result}", icon="✅")
+            # if a value error occurs, display the error message
+            if isinstance(st.session_state.area_result, str) and "Reference grid not found in the image." in st.session_state.area_result:
+                st.error(st.session_state.area_result, icon="🚨")
+            else:
+                # display area result
+                st.success(f"Area of the wound: {st.session_state.area_result}", icon="✅")
 
 # call in main
 if __name__ == "__main__":
