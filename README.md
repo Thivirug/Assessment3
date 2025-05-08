@@ -5,7 +5,7 @@ A user-friendly Streamlit app for automatic wound segmentation and area measurem
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
 - 📤 **Upload wound images** with a 5x5 chessboard reference grid
 - 🤖 **Automatic segmentation** using a trained U-Net model
