@@ -2,6 +2,7 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image
 from Unet import UNet
+from IoU import BinaryMeanIoU
 import keras
 import cv2
 import numpy as np
