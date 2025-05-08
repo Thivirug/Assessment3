@@ -33,7 +33,7 @@ Assessment3/
 │   ├── Unet.py               # U-Net model definition
 │   └── Assets/               # Static assets
 │
-├── Checkpoints/        # Trained model weights (Not included in repo)
+├── Checkpoints/        # Trained model (Not included in repo)
 ├── data/               # Image datasets (Not included in repo)
 ├── requirements.txt    # Python dependencies
 ├── packages.txt        # linux packages for opencv
