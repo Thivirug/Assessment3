@@ -1,3 +1,5 @@
+import tensorflow as tf
+
 class BinaryMeanIoU(tf.keras.metrics.Metric):
     def __init__(self, name="mean_iou", **kwargs):
         super().__init__(name=name, **kwargs)
