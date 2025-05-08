@@ -31,16 +31,17 @@ Assessment3/
 │   ├── CalcArea.py           # Area calculation script
 │   ├── CalcAreaLogic.txt     # Area calculation logic
 │   ├── Unet.py               # U-Net model definition
+│   ├── IoU.py                # Custom IoU metric
 │   └── Assets/               # Static assets
 │
-├── Checkpoints/        # Trained model (Not included in repo)
-├── data/               # Image datasets (Not included in repo)
-├── requirements.txt    # Python dependencies
-├── packages.txt        # linux packages for opencv
-├── main.ipynb          # Comprehensive Jupyter notebook for data exploration, model training, and evaluation
-├── .gitignore          # Git ignore file
-├── LICENSE             # Project license
-└── README.md           # Project documentation
+├── Checkpoints/              # Trained model (Not included in repo)
+├── data/                     # Image datasets (Not included in repo)
+├── requirements.txt          # Python dependencies
+├── packages.txt              # linux packages for opencv
+├── final notebook.ipynb      # Comprehensive Jupyter notebook for data exploration, model training, and evaluation
+├── .gitignore                # Git ignore file
+├── LICENSE                   # Project license
+└── README.md                 # Project documentation
 ```
 
 ---
