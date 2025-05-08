@@ -48,7 +48,7 @@ Assessment3/
 
 ## ⚙️ Streamlit App
 
-This is the link to the deployed Streamlit app: [MedAI Wound Segmentation](https://woundseg-app.streamlit.app/)
+This is the link to the deployed Streamlit app: [MedAI Wound Segmentation](https://assessment3-woundseg.streamlit.app/)
 
 ---
 
