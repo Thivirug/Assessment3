@@ -43,7 +43,7 @@ def load_model(model_path: str) -> keras.Model:
     """
         Load the trained UNet model.
     """
-    model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet})
+    model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet, 'BinaryMeanIoU': BinaryMeanIoU})
     return model
 
 @st.cache_resource
