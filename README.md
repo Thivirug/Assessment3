@@ -37,18 +37,9 @@ Assessment3/
 
 ---
 
-## ⚙️ Setup
+## ⚙️ Streamlit App
 
-1. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. **Download model weights:**
-   The app will automatically download the model from Google Drive if not present.
-3. **Run the app:**
-   ```bash
-   streamlit run App/Home.py
-   ```
+This is the link to the deployed Streamlit app: [MedAI Wound Segmentation](https://woundseg-app.streamlit.app/)
 
 ---
 
