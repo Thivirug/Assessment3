@@ -21,18 +21,24 @@ A user-friendly Streamlit app for automatic wound segmentation and area measurem
 Assessment3/
 │
 ├── App/                      # Main application code
-│   ├── .streamlit            # secrets configuration directory
+│   ├── .streamlit            # secrets configuration directory (not included in repo)
 │        ├── secrets.toml     # Streamlit configuration file
 │   ├── Home.py               # Streamlit app entry point
 │   ├── pages/                # Streamlit multipage support
+│        ├── 1_About.py       # About page
+│        ├── 2_Contact.py     # Contact page
+│        ├── 3_Diagnose.py    # Diagnosis page
 │   ├── CalcArea.py           # Area calculation script
+│   ├── CalcAreaLogic.txt     # Area calculation logic
 │   ├── Unet.py               # U-Net model definition
 │   └── Assets/               # Static assets
 │
 ├── Checkpoints/        # Trained model weights (Not included in repo)
 ├── data/               # Image datasets (Not included in repo)
 ├── requirements.txt    # Python dependencies
+├── packages.txt        # linux packages for opencv
 ├── main.ipynb          # Comprehensive Jupyter notebook for data exploration, model training, and evaluation
+├── .gitignore          # Git ignore file
 ├── LICENSE             # Project license
 └── README.md           # Project documentation
 ```
