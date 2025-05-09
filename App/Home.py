@@ -39,12 +39,12 @@ def display_samples() -> None:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.image("App/Assets/test3.png", caption="Sample Input Image 1")
-        st.image("App/Assets/test3Pred.jpg", caption="Sample Prediction Image 1")
-        st.image("App/Assets/test3Area.png", caption="Area Displayed")
+        st.image("App/Assets/test5.png", caption="Sample Input Image 1")
+        st.image("App/Assets/test5Pred.jpg", caption="Sample Prediction Image 1")
+        st.image("App/Assets/test5Area.png", caption="Area Displayed")
     with col2:
         st.image("App/Assets/test6.png", caption="Sample Input Image 2")
-        st.image("App/Assets/test6Pred.png", caption="Sample Prediction Image 2")
+        st.image("App/Assets/test6Pred.jpg", caption="Sample Prediction Image 2")
         st.image("App/Assets/test6Area.png", caption="Area Displayed")
 
     # Add a horizontal line
