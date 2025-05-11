@@ -10,7 +10,6 @@ import numpy as np
 import subprocess
 import os
 import hashlib
-# import calc_area function from CalcArea.py
 from CalcArea import calc_area
 
 # initialise session state variables for conditional rendering 
