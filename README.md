@@ -39,7 +39,8 @@ Assessment3/
 ├── data/                     # Image datasets (Not included in repo)
 ├── requirements.txt          # Python dependencies
 ├── packages.txt              # linux packages for opencv
-├── final notebook.ipynb      # Comprehensive Jupyter notebook for data exploration, model training, and evaluation
+├── final notebook 1.ipynb    # Comprehensive Jupyter notebook for data exploration, model training, and evaluation -> MODEL1
+├── final notebook 2.ipynb    # Comprehensive Jupyter notebook for data exploration, model training, and evaluation -> MODEL2
 ├── .gitignore                # Git ignore file
 ├── LICENSE                   # Project license
 └── README.md                 # Project documentation
