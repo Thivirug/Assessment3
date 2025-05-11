@@ -244,7 +244,7 @@ def run_app() -> None:
     BASE_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir, os.pardir))
 
     # Construct the absolute path to the destination file
-    destination = os.path.join(BASE_DIR, "Checkpoints", "unet_best_model.keras")
+    destination = os.path.join(BASE_DIR, "Checkpoints", "unet_best_model_newv2.keras")
     # download model if it doesn't exist and load it
     model = get_model(destination)
 
