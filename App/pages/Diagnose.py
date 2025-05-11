@@ -3,6 +3,7 @@ import tensorflow as tf
 from PIL import Image
 from Unet import UNet
 from IoU import BinaryMeanIoU
+from Loss import BCEDiceLoss
 import keras
 import cv2
 import numpy as np
@@ -44,7 +45,7 @@ def load_model(model_path: str) -> keras.Model:
     """
         Load the trained UNet model.
     """
-    model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet, 'BinaryMeanIoU': BinaryMeanIoU})
+    model = tf.keras.models.load_model(model_path, custom_objects={'UNet': UNet, 'BinaryMeanIoU': BinaryMeanIoU, 'BCEDiceLoss': BCEDiceLoss})
     return model
 
 @st.cache_resource
