@@ -32,6 +32,7 @@ Assessment3/
 │   ├── CalcAreaLogic.txt     # Area calculation logic
 │   ├── Unet.py               # U-Net model definition
 │   ├── IoU.py                # Custom IoU metric
+│   ├── Loss.py               # Custom loss function
 │   └── Assets/               # Static assets
 │
 ├── Checkpoints/              # Trained model (Not included in repo)
