@@ -85,7 +85,7 @@ def run_app() -> None:
     BASE_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir, os.pardir))
 
     # Construct the absolute path to the destination file
-    img_dir = os.path.join(BASE_DIR, "App", "Assets", "unet.jpg")
+    img_dir = os.path.join(BASE_DIR, "App", "Assets", "unet.png")
     st.image(img_dir, caption="The U-Net", use_container_width=True)
 
     # Model information
